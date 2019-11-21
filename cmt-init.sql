@@ -2,20 +2,20 @@ USE cmt;
 
 -- 회원
 CREATE TABLE member (
-	member_id			 		 VARCHAR(20) NOT NULL, -- 회원아이디
-	password 		 VARCHAR(20) NULL, -- 비밀번호
-	name     		 VARCHAR(12) NULL, -- 회원명
-	join_date		 DATETIME    NULL, -- 가입일
+	member_id	VARCHAR(20) NOT NULL, -- 회원아이디
+	PASSWORD 	VARCHAR(20) NULL, -- 비밀번호
+	NAME			VARCHAR(12) NULL, -- 회원명
+	join_date	DATETIME    NULL, -- 가입일
 	PRIMARY KEY(member_id)
 );
 
 -- 작가
 CREATE TABLE author (
-	author_id     		  VARCHAR(20)  NOT NULL, -- 작가아이디
-	profile_image INT          NULL, -- 프로필사진
-	name          VARCHAR(30)  NULL, -- 작가명
-	job           VARCHAR(30)  NULL, -- 직업
-	introduce     VARCHAR(100) NULL, -- 소개글
+	author_id		VARCHAR(20)  NOT NULL, -- 작가아이디
+	profile_image	INT          NULL, -- 프로필사진
+	NAME				VARCHAR(30)  NULL, -- 작가명
+	job				VARCHAR(30)  NULL, -- 직업
+	introduce		VARCHAR(100) NULL, -- 소개글
 	PRIMARY KEY(author_id)
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE subscribe (
 );
 
 -- 좋아요
-CREATE TABLE sympathy (
+CREATE TABLE empathy (
 	member_id     VARCHAR(20) NOT NULL, -- 회원아이디
 	post_no       INT         NOT NULL, -- 게시글번호
 	register_date DATETIME    NULL, -- 등록일
@@ -131,10 +131,10 @@ ALTER TABLE subscribe ADD CONSTRAINT FK_member_TO_subscribe -- 회원  -> 구독
 		FOREIGN KEY (member_id) REFERENCES member (member_id);
 
 -- 좋아요 외래키
-ALTER TABLE sympathy ADD CONSTRAINT FK_member_TO_sympathy -- 회원 -> 좋아요
+ALTER TABLE empathy ADD CONSTRAINT FK_member_TO_empathy -- 회원 -> 좋아요
 		FOREIGN KEY (member_id) REFERENCES member (member_id);
 
-ALTER TABLE sympathy ADD CONSTRAINT FK_post_TO_sympathy -- 게시글 -> 좋아요
+ALTER TABLE empathy ADD CONSTRAINT FK_post_TO_empathy -- 게시글 -> 좋아요
 		FOREIGN KEY (post_no) REFERENCES post (post_no);
 		
 -- 공유 외래키
