@@ -22,6 +22,10 @@ INSERT INTO subscribe VALUES("byeon","byeon2",NOW()),("byeon","byeon3",NOW());
 
 INSERT INTO `share` VALUES(1,"byeon2",1,"instargram",NOW()),(2,"byeon2",1,"facebook",NOW());
 
+INSERT INTO reply VALUES(1,"byeon2",1,NOW(),"너무 재밌네요");
+
+
 SELECT * FROM member;
 SELECT * FROM author;
 SELECT * FROM post;
+SELECT * FROM reply;

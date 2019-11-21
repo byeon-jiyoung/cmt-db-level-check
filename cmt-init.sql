@@ -21,16 +21,16 @@ CREATE TABLE author (
 
 -- 첨부파일
 CREATE TABLE attachment (
-	attachment_id   INT      	  NOT NULL, -- 첨부파일번호
+	attachment_id   	INT      	  NOT NULL, -- 첨부파일번호
 	name      			VARCHAR(100) NULL, -- 첨부파일명
-	attachment_date DATETIME     NULL, -- 등록일
+	attachment_date 	DATETIME     NULL, -- 등록일
 	PRIMARY KEY(attachment_id)
 );
 
 -- 게시글
 CREATE TABLE post (
 	post_id       INT          NOT NULL, -- 게시글번호
-	attachment_id       INT          NULL, -- 대표이미지
+	attachment_id INT          NULL, -- 대표이미지
 	author_id     VARCHAR(20)  NULL, -- 작성자
 	category_id   INT          NULL, -- 카테고리번호
 	title         VARCHAR(100) NULL, -- 제목
@@ -49,13 +49,13 @@ CREATE TABLE category (
 );
 
 -- 댓글
-CREATE TABLE comment (
-	comment_id     INT           NOT NULL, -- 댓글번호
-	member_id      VARCHAR(20)   NULL, -- 작성자
-	post_id        INT           NULL, -- 게시글번호
-	register_date  DATETIME      NULL, -- 작성일
+CREATE TABLE reply (
+	reply_id     	INT           NOT NULL, -- 댓글번호
+	member_id    	VARCHAR(20)   NULL, -- 작성자
+	post_id      	INT           NULL, -- 게시글번호
+	register_date	DATETIME      NULL, -- 작성일
 	content        VARCHAR(1000) NULL, -- 내용
-	PRIMARY KEY(comment_id)
+	PRIMARY KEY(reply_id)
 );
 
 -- 구독
@@ -117,10 +117,10 @@ ALTER TABLE post ADD CONSTRAINT FK_category_TO_post -- 카테고리 -> 게시글
 		FOREIGN KEY (category_id) REFERENCES category (category_id);
 
 -- 댓글 외래키
-ALTER TABLE comment ADD CONSTRAINT FK_member_TO_comment -- 회원 -> 댓글
+ALTER TABLE reply ADD CONSTRAINT FK_member_TO_reply -- 회원 -> 댓글
 		FOREIGN KEY (member_id) REFERENCES member (member_id);
 
-ALTER TABLE comment ADD CONSTRAINT FK_post_TO_comment -- 게시글 -> 댓글
+ALTER TABLE reply ADD CONSTRAINT FK_post_TO_reply -- 게시글 -> 댓글
 		FOREIGN KEY (post_id) REFERENCES post (post_id);
 
 -- 구독 외래키
