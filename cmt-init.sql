@@ -12,7 +12,7 @@ CREATE TABLE member (
 -- 작가
 CREATE TABLE author (
 	author_id		VARCHAR(20)  NOT NULL, -- 작가아이디
-	profile_image	INT          NULL, -- 프로필사진
+	proattachments_image	INT          NULL, -- 프로필사진
 	NAME				VARCHAR(30)  NULL, -- 작가명
 	job				VARCHAR(30)  NULL, -- 직업
 	introduce		VARCHAR(100) NULL, -- 소개글
@@ -20,17 +20,17 @@ CREATE TABLE author (
 );
 
 -- 첨부파일
-CREATE TABLE file (
-	file_no   INT      	  NOT NULL, -- 첨부파일번호
+CREATE TABLE attachments (
+	attachments_no   INT      	  NOT NULL, -- 첨부파일번호
 	name      VARCHAR(100) NULL, -- 첨부파일명
-	file_date DATETIME     NULL, -- 등록일
-	PRIMARY KEY(file_no)
+	attachments_date DATETIME     NULL, -- 등록일
+	PRIMARY KEY(attachments_no)
 );
 
 -- 게시글
 CREATE TABLE post (
 	post_no       INT          NOT NULL, -- 게시글번호
-	file_no       INT          NULL, -- 대표이미지
+	attachments_no       INT          NULL, -- 대표이미지
 	author_id     VARCHAR(20)  NULL, -- 작성자
 	category_no   INT          NULL, -- 카테고리번호
 	title         VARCHAR(100) NULL, -- 제목
@@ -103,12 +103,12 @@ CREATE TABLE post_tag (
 ALTER TABLE author ADD CONSTRAINT FK_member_TO_author -- 회원 -> 작가
 		FOREIGN KEY (author_id) REFERENCES member (member_id);
 
-ALTER TABLE author ADD CONSTRAINT FK_file_TO_author -- 첨부파일 -> 작가
-		FOREIGN KEY (profile_image) REFERENCES file (file_no);
+ALTER TABLE author ADD CONSTRAINT FK_attachments_TO_author -- 첨부파일 -> 작가
+		FOREIGN KEY (proattachments_image) REFERENCES attachments (attachments_no);
 
 -- 게시글 외래키
-ALTER TABLE post ADD CONSTRAINT FK_file_TO_post -- 첨부파일 -> 게시글
-		FOREIGN KEY (file_no) REFERENCES file (file_no);
+ALTER TABLE post ADD CONSTRAINT FK_attachments_TO_post -- 첨부파일 -> 게시글
+		FOREIGN KEY (attachments_no) REFERENCES attachments (attachments_no);
 
 ALTER TABLE post ADD CONSTRAINT FK_author_TO_post -- 작가 -> 게시글
 		FOREIGN KEY (author_id) REFERENCES author (author_id);
